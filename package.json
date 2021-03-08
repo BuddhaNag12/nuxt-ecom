@@ -1,0 +1,38 @@
+{
+    "name": "ecommerce-webapp",
+    "version": "1.0.0",
+    "description": "My impeccable Nuxt.js project",
+    "author": "JoyBoi && Buddha",
+    "private": true,
+    "scripts": {
+        "dev": "cross-env NODE_ENV=development nodemon src/server/index.js --watch server",
+        "build": "nuxt build",
+        "start": "cross-env NODE_ENV=production node src/server/index.js",
+        "generate": "nuxt generate",
+        "clean:public": "rimraf \"public/**/*.*!(md)\" && rimraf \"public/_nuxt\"",
+        "clean:functions": "rimraf \"functions/node_modules\" && rimraf \"functions/.nuxt\"",
+        "clean:static": "rimraf \"src/static/sw.js\"",
+        "clean": "npm run clean:public && npm run clean:functions && npm run clean:static",
+        "copy": "npm run copy:nuxt && npm run copy:static",
+        "copy:nuxt": "xcopy \"functions\\.nuxt\\dist\\*\" \"public\\_nuxt\\\" /E /Y",
+        "copy:static": "xcopy \"src\\static\\*\" \"public\\\" /E /Y",
+        "build:firebase": "npm run clean && npm run build && npm run copy && cd functions && npm i",
+        "start:firebase": "firebase serve --only functions,hosting",
+        "deploy": "firebase deploy --only functions,hosting"
+    },
+    "dependencies": {
+        "@nuxtjs/axios": "^5.3.6",
+        "@nuxtjs/firebase": "^5.2.0",
+        "cross-env": "^5.2.0",
+        "express": "^4.16.4",
+        "firebase": "^7.14.3",
+        "nuxt": "^2.12.2",
+        "nuxt-material-design-icons": "^1.0.4"
+    },
+    "devDependencies": {
+        "@nuxtjs/dotenv": "^1.4.1",
+        "@nuxtjs/vuetify": "^1.11.2",
+        "material-design-icons-iconfont": "^5.0.1",
+        "nodemon": "^1.18.9"
+    }
+}
